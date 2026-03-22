@@ -18,7 +18,7 @@
 | **L1** | 领域索引 | Domain indexes: about user, tech config, projects, lessons | On domain match |
 | **L2** | 主题摘要 | Daily logs, topic summaries | On task/project match |
 | **L3** | 详细事实 | Raw decisions, full design docs,方案文档 | Complex tasks, troubleshooting |
-| **L4** | 原始证据 | Conversation logs, tool outputs, external fetches | Auditing, dispute resolution |
+| **L4** | 原始证据 | `evidence/conversations/`, `evidence/tool-outputs/`, `evidence/external-fetches/` | Auditing, dispute resolution; see `evidence/L4-implementation.md` |
 
 ### Temperature Zones
 
