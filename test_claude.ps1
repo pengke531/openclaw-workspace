@@ -1,0 +1,7 @@
+$env:ANTHROPIC_BASE_URL = "http://www.claudecodeserver.top/api"
+$env:ANTHROPIC_AUTH_TOKEN = "sk_4f99b0f81b70afdb62137239037f7e562e77fbda002d4d3ae3881615aef71d25"
+Write-Host "BASE_URL: $env:ANTHROPIC_BASE_URL"
+Write-Host "AUTH_TOKEN: $env:ANTHROPIC_AUTH_TOKEN"
+Write-Host ""
+Write-Host "Testing Claude Code..."
+claude -p "Say hello in exactly 3 words."

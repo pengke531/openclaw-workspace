@@ -1,0 +1,220 @@
+{
+  "scenic_spots": [
+    {
+      "name": "九寨沟风景区",
+      "location": "四川省阿坝藏族羌族自治州九寨沟县",
+      "ticket": {
+        "peak_season": {
+          "period": "4月1日-11月15日",
+          "price": 190,
+          "unit": "元/人"
+        },
+        "off_season": {
+          "period": "11月16日-次年3月31日",
+          "price": 80,
+          "unit": "元/人"
+        }
+      },
+      "sightseeing_bus": {
+        "price": 90,
+        "unit": "元/人",
+        "mandatory": true,
+        "note": "淡季80元/人，旺季90元/人"
+      },
+      "cable_car": {
+        "available": false,
+        "note": "九寨沟无索道"
+      },
+      "discount_policy": {
+        "children": {
+          "condition": "6周岁以下或身高1.2米以下",
+          "discount": "免门票+观光车票"
+        },
+        "elderly": {
+          "condition": "70周岁以上",
+          "discount": "免门票，需另购全价观光车票"
+        },
+        "military": {
+          "condition": "现役军人、离休干部、残疾人员",
+          "discount": "免门票，需另购观光车票"
+        },
+        "half_price": {
+          "condition": "学生、60-64岁老人",
+          "discount": "旺季110元/人，淡季40元/人，需另购全价观光车票"
+        }
+      },
+      "opening_hours": {
+        "peak": "08:30-14:00入园，18:00闭园",
+        "off": "08:30-14:00入园"
+      },
+      "suggested_duration": "1-2天",
+      "notes": "景区日限流4.1万人，需提前预约购票"
+    },
+    {
+      "name": "黄龙景区",
+      "location": "四川省阿坝藏族羌族自治州松潘县",
+      "ticket": {
+        "peak_season": {
+          "period": "4月1日-11月15日",
+          "price": 170,
+          "unit": "元/人"
+        },
+        "off_season": {
+          "period": "11月16日-次年3月31日",
+          "price": 60,
+          "unit": "元/人"
+        }
+      },
+      "sightseeing_bus": {
+        "price": 20,
+        "unit": "元/人",
+        "mandatory": false,
+        "note": "往返20元/人，单程15元/人（2025年11月起执行）"
+      },
+      "cable_car": {
+        "available": true,
+        "upward_price": 80,
+        "note": "上行索道80元/人，可步行7公里游览"
+      },
+      "discount_policy": {
+        "children": {
+          "condition": "6周岁以下或身高1.2米以下",
+          "discount": "免门票（不含观光车和索道）"
+        },
+        "elderly": {
+          "condition": "65周岁以上",
+          "discount": "免门票（不含观光车和索道）"
+        },
+        "military": {
+          "condition": "现役军人、残疾军人、消防救援人员",
+          "discount": "免门票（不含观光车和索道）"
+        },
+        "half_price": {
+          "condition": "学生、60-64岁老人（非节假日）",
+          "discount": "门票半价"
+        }
+      },
+      "opening_hours": {
+        "peak": "07:30-17:00",
+        "note": "观光车运行时间7:30-17:00"
+      },
+      "suggested_duration": "4-6小时",
+      "notes": "海拔3500米，建议提前服用红景天"
+    },
+    {
+      "name": "毕棚沟",
+      "location": "四川省阿坝藏族羌族自治州理县",
+      "ticket": {
+        "peak_season": {
+          "period": "4月1日-11月30日",
+          "price": 80,
+          "unit": "元/人"
+        },
+        "off_season": {
+          "period": "12月1日-次年3月31日",
+          "price": 60,
+          "unit": "元/人"
+        }
+      },
+      "sightseeing_bus": {
+        "price": 60,
+        "unit": "元/人",
+        "mandatory": true,
+        "note": "必购，景区内电瓶车需另购"
+      },
+      "electric_cart": {
+        "available": true,
+        "price": 30,
+        "unit": "元/人/段",
+        "note": "上海子-磐羊湖、月亮湾-燕子岩，每段往返30元，单程20元"
+      },
+      "discount_policy": {
+        "children": {
+          "condition": "1.2米以下或6周岁以下",
+          "discount": "免门票+观光车票"
+        },
+        "elderly": {
+          "condition": "65周岁以上",
+          "discount": "免门票"
+        },
+        "military": {
+          "condition": "现役军人、残疾军人、离休干部",
+          "discount": "免门票+车票"
+        },
+        "half_price": {
+          "condition": "学生、60-64岁老人",
+          "discount": "门票半价"
+        }
+      },
+      "opening_hours": {
+        "general": "08:00-17:30",
+        "note": "停止售票15:30，最晚入园15:30"
+      },
+      "suggested_duration": "半天到1天",
+      "notes": "被誉为小九寨，海拔2000-5000米"
+    },
+    {
+      "name": "达古冰川",
+      "location": "四川省阿坝藏族羌族自治州黑水县",
+      "ticket": {
+        "peak_season": {
+          "period": "4月1日-9月30日",
+          "price": 80,
+          "unit": "元/人"
+        },
+        "off_season": {
+          "period": "10月1日-次年3月31日",
+          "price": 80,
+          "unit": "元/人",
+          "note": "淡旺季同价"
+        }
+      },
+      "sightseeing_bus": {
+        "price": 70,
+        "unit": "元/人",
+        "mandatory": true,
+        "note": "山脚到山腰"
+      },
+      "cable_car": {
+        "available": true,
+        "price": 150,
+        "unit": "元/人",
+        "note": "山腰到4860米观景台，可自愿选择"
+      },
+      "discount_policy": {
+        "children": {
+          "condition": "6周岁以下或身高1.2米以下",
+          "discount": "免门票+观光车+索道"
+        },
+        "elderly": {
+          "condition": "65周岁以上（非节假日）",
+          "discount": "免门票+观光车+索道"
+        },
+        "military": {
+          "condition": "现役军人、残疾人",
+          "discount": "免门票"
+        },
+        "half_price": {
+          "condition": "学生、60-64岁老人（节假日）",
+          "discount": "门票半价"
+        },
+        "special": {
+          "condition": "应届中高考生（6月15日-8月31日）",
+          "discount": "免门票+观光车+索道（需购10元意外险）"
+        }
+      },
+      "opening_hours": {
+        "general": "08:00-15:00入园，18:00闭园"
+      },
+      "suggested_duration": "半天到1天",
+      "notes": "海拔4860米，套票官方价298元/人（门票+观光车+索道）"
+    }
+  ],
+  "data_source": "百度搜索 2024-2025年信息",
+  "data_date": "2025-03-18",
+  "remarks": [
+    "以上价格为参考价，实际以景区官方公告为准",
+    "优惠政策具体执行以景区现场为准，建议携带有效证件",
+    "节假日定义以国家法定节假日为准"
+  ]
+}

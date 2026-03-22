@@ -1,0 +1,27 @@
+{
+  "name": "chuanxi-tourism",
+  "version": "1.0.0",
+  "description": "川西旅游小程序 - Chuanxi Tourism Mini Program",
+  "main": "src/main.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development UNI_PLATFORM=mp-weixin vue-cli-service uni-build --watch",
+    "build": "cross-env NODE_ENV=production UNI_PLATFORM=mp-weixin vue-cli-service uni-build",
+    "serve": "cross-env NODE_ENV=development UNI_PLATFORM=h5 vue-cli-service uni-serve"
+  },
+  "dependencies": {
+    "@dcloudio/uni-app": "^2.0.0",
+    "@dcloudio/uni-h5": "^2.0.0",
+    "@dcloudio/uni-mp-weixin": "^2.0.0",
+    "vue": "^3.3.4",
+    "pinia": "^2.1.6",
+    "vant-weapp": "^1.10.5",
+    "axios": "^1.5.0"
+  },
+  "devDependencies": {
+    "@dcloudio/vue-cli-plugin-uni": "^2.0.0",
+    "@dcloudio/webpack-uni-mp-loader": "^2.0.0",
+    "@vue/cli-service": "^5.0.8",
+    "cross-env": "^7.0.3",
+    "typescript": "^5.2.2"
+  }
+}

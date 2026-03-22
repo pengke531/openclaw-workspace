@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "skills": {
+    "memory-setup-openclaw": {
+      "version": "1.0.0",
+      "installedAt": 1773587879198
+    },
+    "bilibili-transcript": {
+      "version": "1.1.0",
+      "installedAt": 1773589693843
+    },
+    "less-token": {
+      "version": "1.0.2",
+      "installedAt": 1773589799093
+    },
+    "yolo-vision-tools": {
+      "version": "1.2.0",
+      "installedAt": 1773590280567
+    },
+    "skill-vetter": {
+      "version": "1.0.0",
+      "installedAt": 1773590640709
+    },
+    "openclaw-tavily-search": {
+      "version": "0.1.0",
+      "installedAt": 1773591430208
+    },
+    "openclaw-memory-qdrant": {
+      "version": "1.0.15",
+      "installedAt": 1773591840154
+    },
+    "openclaw-semantic-memory": {
+      "version": "1.0.0",
+      "installedAt": 1773593099968
+    },
+    "three-layer-memory": {
+      "version": "2.0.0",
+      "installedAt": 1773594719271
+    },
+    "memory-lancedb-hybrid": {
+      "version": "1.2.1",
+      "installedAt": 1773595079637
+    }
+  }
+}

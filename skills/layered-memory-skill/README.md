@@ -1,98 +1,166 @@
 # Layered Memory Skill
 
-> 按层加载记忆，兼顾完整性与效率。
+## Overview
 
-## Problem It Solves
+A production-grade layered memory architecture for AI agents. Implements L0-L4 layered structure with temperature zones (hot/warm/cold), enabling "index-first, then drill down on match" loading.
 
-- **Too much context**: Loading all historical memory on every task causes token waste and slower inference
-- **Forgetting important facts**: Selective loading risks missing relevant context
-- **No structure**: Flat memory files make targeted retrieval impossible
+Core principle: Do not load all history every time. Load precisely what the task needs.
 
-## Solution: Layered + Temperature Architecture
+## Problem / Solution
 
-### Layers
+| Problem | Solution |
+|---------|----------|
+| Context bloat | L0 index-first, load on demand |
+| Memory gaps | L1-L3 coverage ensures match-based retrieval |
+| No structure | Layered indexes + temperature zones + decision tree |
 
-| Layer | Name | What It Contains | When To Load |
-|-------|------|-----------------|--------------|
-| **L0** | 总索引 | MEMORY.md — the master index | Always (every session) |
-| **L1** | 领域索引 | Domain indexes: about user, tech config, projects, lessons | On domain match |
-| **L2** | 主题摘要 | Daily logs, topic summaries | On task/project match |
-| **L3** | 详细事实 | Raw decisions, full design docs,方案文档 | Complex tasks, troubleshooting |
-| **L4** | 原始证据 | `evidence/conversations/`, `evidence/tool-outputs/`, `evidence/external-fetches/` | Auditing, dispute resolution; see `evidence/L4-implementation.md` |
+## Layer Architecture
 
-### Temperature Zones
+```
+Task received
+  |
+  v
+L0 - Master Index (MEMORY.md)      <- always
+  |
+  v
+L1 - Domain Indexes (user/tech/projects/lessons)  <- on domain match
+  |
+  v
+L2 - Topic Summaries (daily logs)  <- on task/project match
+  |
+  v
+L3 - Detailed Records (design docs) <- on complex/troubleshoot
+  |
+  v
+L4 - Raw Evidence (conversations/tool-outputs/external) <- audit only
+```
 
-- **Hot** (≤7 days): Active projects, current tasks → L0-L2
-- **Warm** (7-30 days): Recent past, less active → L2-L3
-- **Cold** (>30 days): Archival, rarely needed → L3-L4
+## Layer Definitions
 
-## Core Principle
+| Layer | Name | Content | Load Trigger |
+|-------|------|---------|-------------|
+| L0 | Master Index | MEMORY.md | Every session (mandatory) |
+| L1 | Domain Index | User/tech/projects/lessons | On domain keyword match |
+| L2 | Topic Summary | Daily logs / topic summaries | On task/project match |
+| L3 | Detailed Records | Design docs / full specs | Complex tasks / troubleshooting |
+| L4 | Raw Evidence | Conversations / tool outputs / external fetches | Audit / dispute only |
 
-> **Index first, load on match, drill down only when needed.**
+## Temperature Zones
 
-## Quick Start
-
-1. Read `MEMORY.md` (L0) every session
-2. Match domain → load `memory/技术配置.md` or `memory/项目经验.md` (L1)
-3. Match task → load `memory/YYYY-MM-DD.md` (L2)
-4. Complex task → continue to L3/L4 as needed
+| Zone | Time Range | Typical Layers |
+|------|------------|---------------|
+| Hot | <= 7 days | L0-L2 (active projects) |
+| Warm | 7-30 days | L2-L3 (recent past) |
+| Cold | > 30 days | L3-L4 (archival) |
 
 ## Decision Tree
 
 ```
-Is this a simple one-step task?
-  YES → L0 only
-  NO  → Continue
+Is this a simple task (one step, <5min)?
+  YES -> L0 only -> STOP
 
-Is it a known project/domain?
-  YES → L0 + L1 (relevant files)
-  NO  → Continue
+Does it involve a known domain (user/tech/project/lessons)?
+  YES -> L0 + L1 (matched files) -> Is L1 sufficient? -> YES STOP / NO continue
 
-Does L1 provide enough context?
-  YES → Stop
-  NO  → Continue to L2
+Does it involve a specific project/task?
+  YES -> L0 + L1 + L2 -> Is L2 sufficient? -> YES STOP / NO continue
 
-Is it a complex/critical task?
-  YES → L0 + L1 + L2 + L3
-  NO  → L0 + L1 + L2
+Is this a complex task / troubleshooting / architecture decision?
+  YES -> L0 + L1 + L2 + L3
 
-Audit or dispute?
-  YES → May access L4
+Is this an audit / dispute?
+  YES -> May access L4
 ```
 
-## File Structure
+## Usage
+
+### 1. Copy to skills directory
+
+```
+your-openclaw-workspace/skills/layered-memory-skill/
+```
+
+### 2. On session start
+
+Load layers per decision tree above. Do not load all layers by default.
+
+### 3. On task end
+
+Update relevant L1 files with key decisions. Do not leave important info only in daily log.
+
+## Loading Scenarios
+
+### Scenario 1: Simple Question
+Task: "What is the user's name?"
+
+Loading: L0 (MEMORY.md) -> found in user section -> STOP
+
+Layers: 1 (L0 only)
+Time: <1 min
+
+### Scenario 2: Project Task
+Task: Continue working on "智惠 X4" project
+
+Loading: L0 -> L1 (projects.md) -> L2 (recent daily logs) -> L3 (if deeply technical)
+
+Layers: L0 + L1 + L2 (L3 on demand)
+Time: 2-3 min
+
+### Scenario 3: Complex Execution
+Task: Implement AgentOS v2 and ship it
+
+Loading: L0 -> L1 (active tasks + tech) -> L2 (today's session) -> L3 (blueprint + governance docs)
+
+Layers: L0 + L1 + L2 + L3
+Time: 5-10 min
+
+### Scenario 4: Audit / Dispute
+Task: Verify what was decided on a past technical direction
+
+Loading: L0 -> L1 -> L2 (all relevant daily logs) -> L3 (design docs) -> L4 (raw evidence if needed)
+
+Layers: All layers as needed
+Time: 10-15 min
+
+## Files
 
 ```
 layered-memory-skill/
-├── SKILL.md                  # This skill
-├── README.md                 # Full documentation
+├── SKILL.md                   # Core specification (activation, layers, decision tree)
+├── README.md                  # This file
+├── LICENSE                    # MIT License
 ├── examples/
-│   └── loading-example.md    # Sample loading sequences
+│   └── loading-example.md     # 5 real loading scenarios
 └── tests/
-    └── validation-cases.md   # Test cases
+    └── validation-cases.md    # 8 validation test cases
 ```
 
-## For Agent Developers
+## Validation Tests
 
-This skill is designed for OpenClaw agents. Integrate it by:
+See `tests/validation-cases.md` for 8 test cases:
+- L0 always loads
+- L1 loads on domain match
+- L2 loads for active projects
+- Simple tasks do not overload
+- Complex tasks drill to L3
+- No premature deep loading
+- L4 accessible for audits
+- Memory indexes stay updated
 
-1. Adding `layered-memory-skill` to your skills directory
-2. Following the loading sequence in your session start
-3. Using the decision tree to determine how deep to load
-4. Updating `MEMORY.md` (L0) and domain indexes (L1) regularly
+## Design Principles
 
-## Loading Rules
+1. Index first, load on match — do not blindly load history without direction
+2. Stop as soon as context is sufficient — do not continue if current layer answers the question
+3. Do not let history hijack judgment — context serves the task, not the other way around
+4. Think about reading when writing — update L1 at task end, do not leave all in daily log
+5. L4 is the last resort — not a daily loading layer, only for audits
 
-- **Never load all layers by default**
-- **Never skip L0** (it's the index)
-- **Stop as soon as context is sufficient**
-- **Write summaries at L2** to make L1 and L2 effective
-- **Don't let daily logs replace structured indexes**
+## Relationship with AgentOS v2
 
-## Testing
+Layered Memory Skill is the **L4 Context layer implementation** for AgentOS v2.
 
-See `tests/validation-cases.md` for test scenarios and expected behaviors.
+AgentOS v2 provides the complete six-layer architecture. Layered Memory Skill is the standalone reusable implementation of the context layer specifically.
 
 ## License
 
-MIT — Open source for the Agent community.
+MIT — free to use, modify, and distribute.

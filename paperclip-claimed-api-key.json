@@ -1,0 +1,4 @@
+{
+  "PAPERCLIP_API_KEY": "local-dev-no-auth-needed",
+  "PAPERCLIP_API_URL": "http://127.0.0.1:3100"
+}

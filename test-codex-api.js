@@ -1,0 +1,24 @@
+const https = require('https');
+
+const token = 'eyJhbGciOiJSUzI1NiIsImtpZCI6IjE5MzQ0ZTY1LWJiYzktNDRkMS1hOWQwLWY5NTdiMDc5YmQwZSIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiaHR0cHM6Ly9hcGkub3BlbmFpLmNvbS92MSJdLCJjbGllbnRfaWQiOiJhcHBfRU1vYW1FRVo3M2YwQ2tYYVhwN2hyYW5uIiwiZXhwIjoxNzc0MDE1MTg1LCJodHRwczovL2FwaS5vcGVuYWkuY29tL2F1dGgiOnsiY2hhdGdwdF9hY2NvdW50X2lkIjoiYTg0NjU0N2YtMTI3NC00Mzc5LTg4ZTktZjdhYzc0YTY3ZTczIiwiY2hhdGdwdF9hY2NvdW50X3VzZXJfaWQiOiJ1c2VyLW13ZmtPSDdUQlNTUGdob1dKdmFWMlBzTV9fYTg0NjU0N2YtMTI3NC00Mzc5LTg4ZTktZjdhYzc0YTY3ZTczIiwiY2hhdGdwdF9jb21wdXRlX3Jlc2lkZW5jeSI6Im5vX2NvbnN0cmFpbnQiLCJjaGF0Z3B0X3BsYW5fdHlwZSI6InBsdXMiLCJjaGF0Z3B0X3VzZXJfaWQiOiJ1c2VyLW13ZmtPSDdUQlNTUGdob1dKdmFWMlBzTSIsInVzZXJfaWQiOiJ1c2VyLW13ZmtPSDdUQlNTUGdob1dKdmFWMlBzTSJ9LCJodHRwczovL2FwaS5vcGVuYWkuY29tL3Byb2ZpbGUiOnsiZW1haWwiOiJpdGFjaGlfNTMxQGhvdG1haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWV9LCJpYXQiOjE3NzMxNTExODUsImlzcyI6Imh0dHBzOi8vYXV0aC5vcGVuYWkuY29tIiwianRpIjoiOTczNDhlNDMtZGQyOS00ZTA3LTlkNmQtMzZlODAyMGY1MzJjIiwibmJmIjoxNzczMTUxMTg1LCJwd2RfYXV0aF90aW1lIjoxNzczMzE1MTE4MjY2Mywic2NwIjpbIm9wZW5pZCIsInByb2ZpbGUiLCJlbWFpbCIib2ZmbGluZV9hY2Nlc3MiLCJhcGkuY29ubmVjdG9ycy5yZWFkIiwiYXBpLmNvbm5lY3RvcnMuaW52b2tlIl0sInNlc3Npb25faWQiOiJhdXRoc2Vzc182bEsxc2ZXZFFINEtnS3JVVnJ4TnlvTEYiLCJzbCI6dHJ1ZSwic3ViIjoiYXV0aDB8NjNkZTgyMDMxZTMzNTM1NGMyNTg0YTVmIn0.cxNuspel9AqxcLWiSJNxzniOIiZ27KCtHFhT8usbIeqQiq1UPr2UMLqeEJQJdz1Weg1obVRV0KWh_hiLgcbutDPkz0R-juotquFEiAPr27xU9A_7mF-spAPcTcb_ubPN5uRf_nwtuO7B6r4Nvym7yQDwjj9dib2nDwuNlUE4FVVE8pSpNlD3Los9Tusg_CSHnyQ1GDploIBn7DKB6DWwLS-XVDsppF74RhlUTIXRMoW9uB9PyzSnPsRs54bnHw6V2qwr3gWSiZZY8ZVUye-IV5vKNtgJ-0JCcoyiFhMG1a6vpkYVEn-s7eyZdmNgYj0SppT_67dSZkKGYw1GvwvF1pKvk8R01Cv6stSTXIAO2-0K2BgjRvto_yO4005RSqn6fY1mqU3HHkWjaBQg5-HomkCozpq0AcxXbjXxdAjxNPCFa_AGXHMrznU-lQIOAvTD3c9Wh6Goa_Q0W5Az4AjkbvLebuETiHOlt6aPbqGkFKFgpWQkpJ5kVQ-wC2w6rCz-gVF8E_tjT94VlLTTba9gyebKOv-m2lA7FTi82qxpZhOKAtjvOa-z_8FrbuoS1jdj4HSNJaM5DEWd_36w4fO_CsyaEFkFPPDXgYTy670qrIpPUImvwARMqOqbHeESfe8uW7GKTuiKkAXSchbIQronife9CbwDkoLC3vR01CsCZ3o';
+
+const options = {
+  hostname: 'api.openai.com',
+  path: '/v1/models',
+  method: 'GET',
+  headers: {
+    'Authorization': `Bearer ${token}`
+  }
+};
+
+const req = https.request(options, (res) => {
+  let data = '';
+  res.on('data', (chunk) => data += chunk);
+  res.on('end', () => {
+    console.log('Status:', res.statusCode);
+    console.log('Response:', data);
+  });
+});
+
+req.on('error', (e) => console.error('Error:', e.message));
+req.end();
